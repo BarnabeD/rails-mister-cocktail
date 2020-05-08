@@ -1,0 +1,12 @@
+<h1><%= @cocktail.name %></h1>
+<h3>list of ingredients : </h3>
+
+<ul>
+  <% @cocktail.doses.each do |dose| %>
+    <li><%= "#{dose.ingredient.name} - #{dose.description}" %></li>
+  <% end %>
+  <li><%= link_to 'add ingredients', new_cocktail_dose_path(@cocktail) %>
+</li>
+</ul>
+<%= button_to '<- go back', cocktails_path, method: :get, :type => "button", :class => "btn-outline-secondary" %>
+
