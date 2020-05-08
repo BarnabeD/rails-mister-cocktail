@@ -1,8 +1,8 @@
 <h1>Add ingredients to your <%= @cocktail.name %> recipe</h1>
 
 <%= simple_form_for [ @cocktail, @dose ], wrapper: :inline_form, html: { class: "form-inline" } do |f| %>
-  <%= f.input :description, input_html: { class: "mb-2 mr-sm-2" }%>
   <%= f.association :ingredient, input_html: { class: "mb-2 mr-sm-2" }%>
+  <%= f.input :description, input_html: { class: "mb-2 mr-sm-2" }%>
   <%= f.button :submit, class: "btn-primary mb-2" %>
 <% end %>
 <%= button_to 'cancel', cocktail_path(@cocktail), method: :get, :type => "button", :class => "btn-outline-secondary" %>
