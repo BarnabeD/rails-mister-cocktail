@@ -1,11 +1,21 @@
 <h1>Mister Cocktails !</h1>
 <div class="cards">
   <% @cocktails.each do |cocktail| %>
-    <div class="card-category"
-      style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-      url(https://source.unsplash.com/300x200/?<%= cocktail.name %>)">
-      <%= link_to cocktail.name, cocktail_path(cocktail)%>
-    </div>
+    <% if cocktail.photo.attached? %>
+      <div class="card-category" style="background-image: url('<%= cl_image_path cocktail.photo.key, alt: cocktail.name, width: 400, height: 300, crop: :fill %>')">
+        <%= link_to cocktail.name, cocktail_path(cocktail)%>
+      </div>
+    <% else %>
+      <div class="card-category empty">
+        <%= link_to cocktail.name, cocktail_path(cocktail)%>
+      </div>
+    <% end %>
   <% end %>
 </div>
+
+
+
+
+
+
 <%= link_to 'new cocktail', new_cocktail_path %>

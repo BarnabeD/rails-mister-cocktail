@@ -1,0 +1,4 @@
+<%= simple_form_for(@cocktail, url: update_photo_path, method: 'patch') do |f| %>
+  <%= f.input :photo, as: :file, input_html: { accept: "image/*" }%>
+  <%= f.button :submit, class: "btn-primary" %>
+<% end %>

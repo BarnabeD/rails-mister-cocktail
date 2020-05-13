@@ -1,7 +1,8 @@
 <h1>Create a new cocktail !</h1>
 <%= simple_form_for(@cocktail) do |f| %>
   <%= f.input :name %>
-  <%= f.submit %>
+  <%= f.input :photo, as: :file, input_html: { accept: "image/*" }%>
+  <%= f.button :submit, class: "btn-primary" %>
 <% end %>
-<%= link_to 'cancel', cocktails_path %>
+<%= link_to 'cancel', root_path %>
 
