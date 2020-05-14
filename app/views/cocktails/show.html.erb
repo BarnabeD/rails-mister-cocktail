@@ -1,15 +1,18 @@
-<h1><%= @cocktail.name %></h1>
-<% if @cocktail.photo.attached? %>
+<div class="navbar-lewagon">
+  <h1><%= @cocktail.name %></h1>
+</div>
+<div class="container">
+  <% if @cocktail.photo.attached? %>
   <%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill %>
-    <%= link_to cocktail_path(@cocktail),
+    <%= link_to delete_photo_path(@cocktail),
     method: :delete,
     data: { confirm: "Delete this photo ?" } do %>
-      <p>Deletethis phtoto ? -> <i class="fas fa-trash-alt"></i></p>
+      <p>Delete this photo ? -> <i class="fas fa-trash-alt"></i></p>
     <% end %>
-<% else %>
-  <%= render partial: "image_form", cocktail: @cocktail %>
-<% end %>
-<h3>list of ingredients : </h3>
+  <% else %>
+    <%= render partial: "image_form", cocktail: @cocktail %>
+  <% end %>
+  <h3>list of ingredients : </h3>
   <ul>
     <% @cocktail.doses.each do |dose| %>
       <li><%= "#{dose.ingredient.name} - #{dose.description} - " %>
@@ -23,5 +26,14 @@
     <li><%= link_to 'add ingredients', new_cocktail_dose_path(@cocktail) %>
     </li>
   </ul>
-<%= button_to '<- go back', root_path, method: :get, :type => "button", :class => "btn-outline-secondary" %>
+  <%= button_to '<- go back', root_path, method: :get, type: "button", class: "btn btn-outline-secondary" %>
+  <%= button_to cocktail_path(@cocktail),
+    method: :delete,
+    data: { confirm: "Delete this cocktail ?" },
+    type: "button",
+    class: "btn btn-warning" do %>
+    <p>Delete this cocktail ? -> <i class="fas fa-trash-alt"></i></p>
+  <% end %>
+</div>
+
 

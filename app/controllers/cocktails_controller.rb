@@ -1,5 +1,5 @@
 class CocktailsController < ApplicationController
-  before_action :set_cocktail, only: [:show, :delete_photo, :update_photo]
+  before_action :set_cocktail, only: [:show, :destroy, :delete_photo, :update_photo]
 
   def index
     @cocktails = Cocktail.all
@@ -8,14 +8,18 @@ class CocktailsController < ApplicationController
   def show
   end
 
+  def destroy
+    @cocktail.destroy
+    redirect_to root_path, method: :get
+  end
+
    def delete_photo
     @cocktail.photo.purge
     redirect_to cocktail_path(@cocktail)
   end
 
   def update_photo
-    @cocktail.photo.attach(params[:photo])
-    @cocktail.save!
+    @cocktail.update(cocktail_params)
     redirect_to cocktail_path(@cocktail)
   end
 

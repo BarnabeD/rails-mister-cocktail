@@ -11,19 +11,32 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1));
+  transition: transform 0.4s ease;
+  opacity: 0.8;
+
+  &:hover {
+    transition: transform 0.5s ease;
+    transform: scale(1.05);
+    opacity: 1;
+  }
 }
-.empty {
-  background-image: url("https://source.unsplash.com/collection/962396/400x300");
+
+.rand-image {
+  background-image: url('https://source.unsplash.com/collection/962396/400x300/?sig=<%= rand(1..100)%>'), linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1));
+}
+
+.new-cocktail {
+  opacity: 0.4;
 }
 
 
 .cards {
+  margin-top: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
 }
-
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
   .cards {
