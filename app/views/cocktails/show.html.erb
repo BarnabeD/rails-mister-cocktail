@@ -2,41 +2,46 @@
   <h1 class="display-5"><%= @cocktail.name %></h1>
 </div>
 <div class="container mt-5">
-  <% if @cocktail.photo.attached? %>
-  <%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill %>
-    <%= link_to delete_photo_path(@cocktail),
-    method: :delete,
-    data: { confirm: "Delete this photo ?" } do %>
-      <p>Delete this photo ? -> <i class="fas fa-trash-alt"></i></p>
-    <% end %>
-  <% else %>
-    <%= simple_form_for(@cocktail, url: update_photo_path, method: 'patch') do |f| %>
-    <%= render partial: "image_field", locals: {:f => f}, required: true %>
-    <%= f.button :submit, "Ajouter la photo", class: "btn btn-success" %>
-    <% end %>
-  <% end %>
-  <h3>list of ingredients : </h3>
-  <ul>
-    <% @cocktail.doses.each do |dose| %>
-      <li><%= "#{dose.ingredient.name} - #{dose.description} - " %>
-        <%= link_to dose_path(dose),
-          method: :delete,
-          data: { confirm: "Delete this ingredient ?" } do %>
-          <i class="fas fa-trash-alt"></i>
-        <% end %>
-      </li>
-    <% end %>
-    <li><%= link_to 'add ingredients', new_cocktail_dose_path(@cocktail) %>
-    </li>
-  </ul>
-  <%= button_to '<- go back', root_path, method: :get, type: "button", class: "btn btn-outline-secondary" %>
-  <%= button_to cocktail_path(@cocktail),
-    method: :delete,
-    data: { confirm: "Delete this cocktail ?" },
-    type: "button",
-    class: "btn btn-warning" do %>
-    <p>Delete this cocktail ? -> <i class="fas fa-trash-alt"></i></p>
-  <% end %>
+  <div class="d-flex justify-content-between">
+    <%= button_to 'Retour', root_path, method: :get, type: "button", class: "btn btn-outline-info" %>
+    <%= button_to cocktail_path(@cocktail),
+            method: :delete,
+            data: { confirm: "Voulez-vous supprimer le cocktail ?" },
+            type: "button",
+            class: "btn btn-info" do %>
+            Supprimer <br><%= @cocktail.name %>
+          <% end %>
+  </div>
+  <div class="d-fex justify-content-between">
+      <% if @cocktail.photo.attached? %>
+            <%= cl_image_tag @cocktail.photo.key, height: 300, width: 400, crop: :fill %>
+            <%= link_to delete_photo_path(@cocktail),
+            method: :delete,
+            data: { confirm: "Delete this photo ?" } do %>
+              <p>Delete this photo ? -> <i class="fas fa-trash-alt"></i></p>
+            <% end %>
+          <% else %>
+            <%= simple_form_for(@cocktail, url: update_photo_path, method: 'patch') do |f| %>
+            <%= render partial: "image_field", locals: {:f => f}, required: true %>
+            <%= f.button :submit, "Ajouter la photo", class: "btn btn-success" %>
+            <% end %>
+          <% end %>
+      <h3>list of ingredients : </h3>
+          <ul>
+            <% @cocktail.doses.each do |dose| %>
+              <li><%= "#{dose.ingredient.name} - #{dose.description} - " %>
+                <%= link_to dose_path(dose),
+                  method: :delete,
+                  data: { confirm: "supprimer l'ingredient ?" } do %>
+                  <i class="fas fa-trash-alt"></i>
+                <% end %>
+              </li>
+            <% end %>
+            <li><%= link_to 'add ingredients', new_cocktail_dose_path(@cocktail) %>
+            </li>
+          </ul>
+  </div>
 </div>
+
 
 
