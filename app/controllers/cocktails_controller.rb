@@ -19,8 +19,11 @@ class CocktailsController < ApplicationController
   end
 
   def update_photo
-    @cocktail.update(cocktail_params)
-    redirect_to cocktail_path(@cocktail)
+    if @cocktail.update(cocktail_params)
+      redirect_to cocktail_path(@cocktail)
+    else
+      render :show
+    end
   end
 
   def new

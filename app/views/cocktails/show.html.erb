@@ -1,5 +1,5 @@
 <div class="navbar-lewagon">
-  <h1><%= @cocktail.name %></h1>
+  <h1 class="display-5"><%= @cocktail.name %></h1>
 </div>
 <div class="container">
   <% if @cocktail.photo.attached? %>
@@ -10,7 +10,10 @@
       <p>Delete this photo ? -> <i class="fas fa-trash-alt"></i></p>
     <% end %>
   <% else %>
-    <%= render partial: "image_form", cocktail: @cocktail %>
+    <%= simple_form_for(@cocktail, url: update_photo_path, method: 'patch') do |f| %>
+    <%= render partial: "image_field", locals: {:f => f}, required: true %>
+    <%= f.button :submit, "Ajouter la photo", class: "btn btn-success" %>
+    <% end %>
   <% end %>
   <h3>list of ingredients : </h3>
   <ul>
